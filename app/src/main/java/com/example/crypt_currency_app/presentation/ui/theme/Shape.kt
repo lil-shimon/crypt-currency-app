@@ -1,4 +1,4 @@
-package com.example.crypt_currency_app.ui.theme
+package com.example.crypt_currency_app.presentation.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
