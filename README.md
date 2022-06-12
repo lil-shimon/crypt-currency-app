@@ -4,5 +4,5 @@
 - Clean Architecture
 - Hilt
 - retrofit2
-- Jetpack ompose
+- Jetpack Compose
 - [coinpaprika](https://coinpaprika.com/ja/) for api
