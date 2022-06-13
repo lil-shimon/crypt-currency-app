@@ -1,5 +1,6 @@
 package com.example.crypt_currency_app.presentation.coin_list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,23 +26,19 @@ fun CoinListScreen(
     viewModel: CoinListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
-        ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.coins) { coin ->
                 CoinListItem(
                     coin = coin,
                     onItemClick = {
+                        Log.d("Coin", "coin click ${coin.id}")
                         navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
                     }
                 )
             }
         }
-
-        if (state.error.isNotBlank()) {
+        if(state.error.isNotBlank()) {
             Text(
                 text = state.error,
                 color = MaterialTheme.colors.error,
@@ -52,12 +49,8 @@ fun CoinListScreen(
                     .align(Alignment.Center)
             )
         }
-
-        if (state.isLoading) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .align(Alignment.Center)
-            )
+        if(state.isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
 }
