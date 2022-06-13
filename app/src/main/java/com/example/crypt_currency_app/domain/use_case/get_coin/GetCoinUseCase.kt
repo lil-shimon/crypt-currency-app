@@ -15,13 +15,13 @@ class GetCoinUseCase @Inject constructor(
 ) {
     operator fun invoke(coinId: String): Flow<Resource<CoinDetail>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resource.Loading<CoinDetail>())
             val coins = repository.getCoinById(coinId).toCoinDetail()
-            emit(Resource.Success(coins)) // forwards to vm
+            emit(Resource.Success<CoinDetail>(coins)) // forwards to vm
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An expected error occurred"))
+            emit(Resource.Error<CoinDetail>(e.localizedMessage ?: "An expected error occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error("Could not reach server. Check your internet connection"))
+            emit(Resource.Error<CoinDetail>("Could not reach server. Check your internet connection"))
         }
     }
 }
